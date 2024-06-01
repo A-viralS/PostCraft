@@ -14,7 +14,7 @@ const CardList = () => {
         <Card />
       </div>
       <Pagination />
-      <Menu />
+
     </div>
   )
 }

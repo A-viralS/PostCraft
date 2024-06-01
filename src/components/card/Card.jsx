@@ -11,10 +11,10 @@ const Card = () => {
       <div className={styles.textContainer}>
         <div className={styles.detail}>
           <span className={styles.date}>11.07.24</span>
-          <span className={styles.category}>Travel</span>
+          <span className={`${styles.category} mr-9`}>Travel</span>
         </div>
         <Link href='/'>
-          <h1>Lorem ipsum dolor sit amet.</h1>
+          <h1 >Lorem ipsum dolor sit amet.</h1>
         </Link>
         <p className={styles.desc}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis,

@@ -4,5 +4,8 @@
   
   .title{
     margin: 50px 0px;
+    text-decoration:double underline;
+    font-family: monospace;
+    font-size: 30px;
     
   }
