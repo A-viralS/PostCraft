@@ -4,6 +4,7 @@
   }
   
   .button {
+    border-radius: 20px;
     width: 100px;
     border: none;
     padding: 16px;

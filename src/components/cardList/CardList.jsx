@@ -32,9 +32,11 @@ const getData = async page => {
 }
 
 const CardList = async ({ page }) => {
-  const posts = await getData(page)
-  console.log('posts:', posts)
-
+  const { posts, count } = await getData(page)
+  const POSTS_PER_PAGE = 2
+  console.log('posts:', posts, count)
+  const hasNext = POSTS_PER_PAGE * page < count
+  const hasPrev = POSTS_PER_PAGE * (page - 1) > 0
   return (
     <div className={styles.container}>
       <div className={styles.title}> Recent posts </div>
@@ -45,7 +47,7 @@ const CardList = async ({ page }) => {
           <div>No posts available</div>
         )}
       </div>
-      <Pagination />
+      <Pagination page={page} hasNext={hasNext} hasPrev={hasPrev} />
     </div>
   )
 }
