@@ -1,9 +1,11 @@
+'use client'
 import React from 'react'
 import styles from './navbar.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
 import ToggleButton from '../togglebutton/ToggleButton'
 import AuthLinks from '../AuthLinks/AuthLinks'
+import { signOut } from 'next-auth/react'
 const Navbar = () => {
   return (
     <div className={styles.container}>
