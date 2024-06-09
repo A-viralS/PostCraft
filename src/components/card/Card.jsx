@@ -20,7 +20,7 @@ const Card = ({ post, key }) => {
       <div className={styles.textContainer}>
         <div className={styles.detail}>
           <span className={styles.date}>{post.createdAt.substring(0, 10)}</span>
-          <span className={`${styles.category} mr-9`}>{post.catSlug}</span>
+          <span className={`${styles.category}`}>{post.catSlug}</span>
         </div>
         <Link href={`/posts/${post.slug}`}>
           <h1>{post.title}</h1>
