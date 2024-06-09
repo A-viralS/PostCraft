@@ -43,7 +43,7 @@ const page = async ({ params }) => {
             <div className={styles.userImageContainer}>
               {post.user.image && (
                 <Image
-                  src={  post.user.image}
+                  src={post.user.image}
                   alt='placeholder'
                   fill
                   className={styles.image}
@@ -74,7 +74,7 @@ const page = async ({ params }) => {
             dangerouslySetInnerHTML={{ __html: post?.desc }}
           ></div>
           <div className={styles.comment}>
-            <Comments />
+            <Comments postSlug={slug} />
           </div>
         </div>
 
