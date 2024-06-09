@@ -12,7 +12,6 @@ const Pagination = ({ page, hasPrev, hasNext }) => {
   const handlePrev = () => {
     router.push(`?page=${page - 1}`)
   }
-
   return (
     <div className={styles.container}>
       <button
@@ -22,7 +21,10 @@ const Pagination = ({ page, hasPrev, hasNext }) => {
       >
         Previous
       </button>
-      <button disabled={!hasNext} className={styles.button} onClick={handlNext}>
+      <button
+       disabled={!hasNext} 
+       className={styles.button} 
+       onClick={handlNext}>
         Next
       </button>
     </div>
