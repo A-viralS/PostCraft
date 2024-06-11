@@ -41,7 +41,7 @@ const page = async ({ params }) => {
           <h1 className={styles.title}>{post?.title}</h1>
           <div className={styles.user}>
             <div className={styles.userImageContainer}>
-              {post.user.image && (
+              {post?.user?.image && (
                 <Image
                   src={post.user.image}
                   alt='placeholder'
@@ -51,15 +51,15 @@ const page = async ({ params }) => {
               )}
             </div>
             <div className={styles.userTextContainer}>
-              <span>{post.user.name}</span>
-              <span>{post.createdAt.substring(0, 10)}</span>
+              <span>{post?.user?.name}</span>
+              <span>{post?.createdAt.substring(0, 10)}</span>
             </div>
           </div>
         </div>
         <div className={styles.imageContainer}>
-          {post.img && (
+          {post?.img && (
             <Image
-              src={'/' + post?.img}
+              src={'/' + post.img}
               alt='placeholder'
               fill
               className={styles.image}

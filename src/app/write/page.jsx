@@ -4,10 +4,21 @@ import Image from 'next/image'
 import styles from './writePage.module.css'
 import { useEffect, useState } from 'react'
 import 'react-quill/dist/quill.bubble.css'
+import { useRouter } from 'next/navigation'
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL
+} from 'firebase/storage'
+import { app } from '@/utils/firebase'
 
 import ReactQuill from 'react-quill'
+import { useSession } from 'next-auth/react'
 
 const WritePage = () => {
+  const router = useRouter()
+  const { status } = useSession()
   const [open, setOpen] = useState(false)
   const [file, setFile] = useState(null)
   const [media, setMedia] = useState('')
@@ -15,6 +26,76 @@ const WritePage = () => {
   const [title, setTitle] = useState('')
   const [catSlug, setCatSlug] = useState('')
 
+  useEffect(() => {
+    const storage = getStorage(app)
+
+    const upload = () => {
+      const name = new Date().getTime() + file.name
+      const storageRef = ref(storage, name)
+
+      const uploadTask = uploadBytesResumable(storageRef, file)
+
+      uploadTask.on(
+        'state_changed',
+        snapshot => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          console.log('Upload is ' + progress + '% done')
+          switch (snapshot.state) {
+            case 'paused':
+              console.log('Upload is paused')
+              break
+            case 'running':
+              console.log('Upload is running')
+              break
+          }
+        },
+        error => {},
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
+            setMedia(downloadURL)
+          })
+        }
+      )
+    }
+    file && upload()
+  }, [file])
+
+  if (status === 'loading') {
+    return <div className={styles.loading}>Loading...</div>
+  }
+
+  const slugify = str =>
+    str
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/[\s_-]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+
+  const handleSubmit = async () => {
+    const res = await fetch('/api/posts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json' // Added Content-Type header
+      },
+      body: JSON.stringify({
+        title,
+        desc: value,
+        img: media,
+        slug: slugify(title),
+        catSlug: catSlug || 'style' // If not selected, choose the general category
+      })
+    })
+
+    if (res.status === 200) {
+      const data = await res.json()
+      console.log('data slug in write page ', data.slug)
+      router.push(`/posts/${data.slug}`) // Corrected the template string
+    } else {
+      console.error('Failed to create post:', await res.json())
+    }
+  }
   return (
     <div className={styles.container}>
       <input
@@ -36,7 +117,18 @@ const WritePage = () => {
       </select>
       <div className={styles.editor}>
         <button className={styles.button} onClick={() => setOpen(!open)}>
-          <Image src='/plus.png' alt='' width={16} height={16} />
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            viewBox='0 0 24 24'
+            fill='currentColor'
+            class='size-6'
+          >
+            <path
+              fill-rule='evenodd'
+              d='M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z'
+              clip-rule='evenodd'
+            />
+          </svg>
         </button>
         {open && (
           <div className={styles.add}>
@@ -48,26 +140,54 @@ const WritePage = () => {
             />
             <button className={styles.addButton}>
               <label htmlFor='image'>
-                <Image src='/image.png' alt='' width={16} height={16} />
+                <Image
+                  src='/image.png'
+                  alt=''
+                  width={32}
+                  height={32}
+                  style={{ padding: '3px' }}
+                />
               </label>
             </button>
             <button className={styles.addButton}>
-              <Image src='/external.png' alt='' width={16} height={16} />
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                stroke-width='1.5'
+                stroke='currentColor'
+                class='size-6'
+              >
+                <path
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                  d='M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25'
+                />
+              </svg>
             </button>
             <button className={styles.addButton}>
-              <Image src='/video.png' alt='' width={16} height={16} />
+              <Image
+                src='/video.png'
+                alt=''
+                width={32}
+                height={32}
+                style={{ padding: '2px' }}
+              />
             </button>
           </div>
         )}
         <ReactQuill
           className={styles.textArea}
+          style={{ marginTop: '30px' }}
           theme='bubble'
           value={value}
           onChange={setValue}
           placeholder='Tell your story...'
         />
       </div>
-      <button className={styles.publish}>Publish</button>
+      <button className={styles.publish} onClick={handleSubmit}>
+        Publish
+      </button>
     </div>
   )
 }
