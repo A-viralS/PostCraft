@@ -6,9 +6,14 @@
   
   .select{
     margin-bottom: 50px;
-    padding: 10px 20px;
+    padding: 10px;
     margin-left: 50px;
     width: max-content;
+    border-radius: 30px;
+    width: 100px;
+    border-color: #1a8917;
+    border-width: 3px;
+
   }
   
   .editor {

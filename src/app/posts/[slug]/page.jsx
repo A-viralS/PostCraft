@@ -34,6 +34,7 @@ const page = async ({ params }) => {
   const { slug } = params
   const post = await getData(slug)
   console.log('post in single page:', post)
+  console.log('image', post)
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
@@ -59,7 +60,7 @@ const page = async ({ params }) => {
         <div className={styles.imageContainer}>
           {post?.img && (
             <Image
-              src={'/' + post.img}
+              src={post?.img}
               alt='placeholder'
               fill
               className={styles.image}
