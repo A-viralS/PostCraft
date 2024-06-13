@@ -10,7 +10,7 @@ const page = ({ searchParams }) => {
       <h1 className={styles.title}>{cat} Blog</h1>
       <div className={styles.content}>
         <CardList page={page} cat={cat} />
-        <Menu />
+        <Menu page={page} />
       </div>
     </div>
   )

@@ -3,7 +3,7 @@ import styles from './Card.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
 const Card = ({ post, key }) => {
-  console.log('inside Card', post.title)
+  // console.log('inside Card', post.title)
 
   return (
     <div className={styles.container} key={key}>

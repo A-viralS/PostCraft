@@ -11,6 +11,12 @@ const getData = async (page, cat) => {
         cache: 'no-store'
       }
     )
+    // const res = await fetch(
+    //   `http://localhost:3000/api/posts?page=${page}&cat=${cat || ''}`,
+    //   {
+    //     cache: 'no-store'
+    //   }
+    // )
 
     // Check if the response is ok (status is in the range 200-299)
     if (!res.ok) {
@@ -37,7 +43,7 @@ const getData = async (page, cat) => {
 const CardList = async ({ page, cat }) => {
   const { posts, count } = await getData(page, cat)
   const POSTS_PER_PAGE = 2
-  console.log('posts:', posts, count)
+  // console.log('posts:', posts, count)
   const hasNext = POSTS_PER_PAGE * page < count
   const hasPrev = POSTS_PER_PAGE * (page - 1) > 0
   return (

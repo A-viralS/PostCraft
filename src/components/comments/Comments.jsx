@@ -21,6 +21,10 @@ const Comments = ({ postSlug }) => {
     `https://post-craft.vercel.app/api/comments?postSlug=${postSlug}`,
     fetcher
   )
+  // const { data, isLoading } = useSWR(
+  //   `http://localhost:3000/api/comments?postSlug=${postSlug}`,
+  //   fetcher
+  // )
   const handleSubmit = async () => {
     await fetch('/api/comments', {
       method: 'POST',
