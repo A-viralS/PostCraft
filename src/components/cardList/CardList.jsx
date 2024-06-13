@@ -5,12 +5,12 @@ import Menu from '../menu/Menu'
 import Card from '../card/Card'
 const getData = async (page, cat) => {
   try {
-    const res = await fetch(
-      `http://localhost:3000/api/posts?page=${page}&cat=${cat || ''}`,
-      {
-        cache: 'no-store'
-      }
-    )
+    // const res = await fetch(
+    //   `http://localhost:3000/api/posts?page=${page}&cat=${cat || ''}`,
+    //   {
+    //     cache: 'no-store'
+    //   }
+    // )
 
     // Check if the response is ok (status is in the range 200-299)
     if (!res.ok) {
@@ -45,7 +45,7 @@ const CardList = async ({ page, cat }) => {
       <div className={styles.title}> Recent posts </div>
       <div className={styles.posts}>
         {posts?.length > 0 ? (
-          posts.map(post => <Card  key={post._id} post={post} />)
+          posts.map(post => <Card key={post._id} post={post} />)
         ) : (
           <div>No posts available</div>
         )}
