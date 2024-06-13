@@ -5,12 +5,12 @@ import Menu from '../menu/Menu'
 import Card from '../card/Card'
 const getData = async (page, cat) => {
   try {
-    // const res = await fetch(
-    //   `http://localhost:3000/api/posts?page=${page}&cat=${cat || ''}`,
-    //   {
-    //     cache: 'no-store'
-    //   }
-    // )
+    const res = await fetch(
+      `https://post-craft.vercel.app/api/posts?page=${page}&cat=${cat || ''}`,
+      {
+        cache: 'no-store'
+      }
+    )
 
     // Check if the response is ok (status is in the range 200-299)
     if (!res.ok) {

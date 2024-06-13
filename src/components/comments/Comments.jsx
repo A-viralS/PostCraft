@@ -7,7 +7,7 @@ import useSWR, { mutate } from 'swr'
 import { useSession } from 'next-auth/react'
 
 const fetcher = async url => {
-  // const res = await fetch(url)
+  const res = await fetch(url)
   const data = await res.json()
   if (!res.ok) {
     throw new Error(data.message)
@@ -17,15 +17,15 @@ const fetcher = async url => {
 const Comments = ({ postSlug }) => {
   const [desc, setDesc] = React.useState('')
   const { status } = useSession()
-  // const { data, isLoading } = useSWR(
-  //   `http://localhost:3000/api/comments?postSlug=${postSlug}`,
-  //   fetcher
-  // )
+  const { data, isLoading } = useSWR(
+    `https://post-craft.vercel.app/api/comments?postSlug=${postSlug}`,
+    fetcher
+  )
   const handleSubmit = async () => {
-    // await fetch('/api/comments', {
-    //   method: 'POST',
-    //   body: JSON.stringify({ desc, postSlug })
-    // })
+    await fetch('/api/comments', {
+      method: 'POST',
+      body: JSON.stringify({ desc, postSlug })
+    })
     mutate()
   }
   console.log('comments:', data?.desc, isLoading)
