@@ -9,12 +9,7 @@ const Card = ({ post, key }) => {
     <div className={styles.container} key={key}>
       <div className={styles.imgContainer}>
         {post.img && (
-          <Image
-            src={'/' + post.img}
-            alt='p1image'
-            fill
-            className={styles.image}
-          />
+          <Image src={post.img} alt='p1image' fill className={styles.image} />
         )}
       </div>
       <div className={styles.textContainer}>
@@ -25,7 +20,10 @@ const Card = ({ post, key }) => {
         <Link href={`/posts/${post.slug}`}>
           <h1>{post.title}</h1>
         </Link>
-        <p className={styles.desc}>{post.desc}</p>
+        <p
+          className={styles.desc}
+          dangerouslySetInnerHTML={{ __html: post.desc }}
+        ></p>
         <Link href={`/posts/${post.slug}`} className={styles.link}>
           Read more{' '}
         </Link>

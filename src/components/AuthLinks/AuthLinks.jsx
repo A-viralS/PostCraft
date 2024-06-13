@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import React, { useState } from 'react'
-import styles from './AuthLinks.module.css'
+import styles from './authLinks.module.css'
 import { signOut, useSession } from 'next-auth/react'
 
 const AuthLinks = () => {

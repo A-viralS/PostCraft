@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 export const GET = async (req,{params}) => {
 
    const {slug}=params
+   console.log("params",params);
 
        
   try {
@@ -14,9 +15,8 @@ export const GET = async (req,{params}) => {
       include : {user:true},
 }
 
-)
-
-    
+)    
+console.log(post);
     return new NextResponse(JSON.stringify(post, { status: 200 }));
   } catch (err) {
     console.log(err);
