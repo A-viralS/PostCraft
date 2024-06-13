@@ -6,7 +6,7 @@ import Image from 'next/image'
 const Menu = () => {
   return (
     <div className={styles.container}>
-      <h2 className={styles.subtitle}>What's hot?!</h2>
+      <h2 className={styles.subtitle}>What&apos;s hot?!</h2>
       <h1 className={styles.title}>Most Popular</h1>
       <div className={styles.items}>
         <Link href='/menu/1' className={styles.item}>
@@ -44,9 +44,7 @@ const Menu = () => {
             <Image src='/p1.jpeg' className={styles.image} fill />
           </div>
           <div className={styles.textContainer}>
-            <span className={`${styles.category} ${styles.food}`}>
-              food
-            </span>
+            <span className={`${styles.category} ${styles.food}`}>food</span>
             <h3 className={styles.postTitle}>Lorem ipsum dolor sit amet.</h3>
             <div className={styles.detail}>
               <span className={styles.username}>John Doe</span>
