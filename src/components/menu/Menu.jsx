@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 const getData = async () => {
-  const res = await fetch('https://post-craft.vercel.app/api/categories', {
+  const res = await fetch('https://post-craft.vercel.app/api/menu', {
     cache: 'no-store'
   })
   // const res = await fetch('http://localhost:3000/api/menu', {
