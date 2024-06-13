@@ -25,8 +25,12 @@ const Menu = async ({ page }) => {
       <h1 className={styles.title}>Most Popular</h1>
       <div className={styles.items}>
         {posts?.map(post => (
-          <Link href={`/posts/${post.slug}`} className={styles.item}>
-            <div className={styles.imageContainer} key={post._id}>
+          <Link
+            href={`/posts/${post.slug}`}
+            className={styles.item}
+            key={post._id}
+          >
+            <div className={styles.imageContainer}>
               <Image src={post?.img} className={styles.image} fill />
             </div>
             <div className={styles.textContainer}>
