@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import styles from './ToggleButton.module.css'
+import styles from './toggleButton.module.css'
 import Image from 'next/image'
 import { useContext } from 'react'
 import { ThemeContext } from '@/Context/ThemeContext'
