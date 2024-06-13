@@ -77,19 +77,19 @@ const WritePage = () => {
       .replace(/^-+|-+$/g, '')
 
   const handleSubmit = async () => {
-    // const res = await fetch('/api/posts', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json' // Added Content-Type header
-    //   },
-    //   body: JSON.stringify({
-    //     title,
-    //     desc: value,
-    //     img: media,
-    //     slug: slugify(title),
-    //     catSlug: catSlug || 'style' // If not selected, choose the general category
-    //   })
-    // })
+    const res = await fetch('/api/posts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json' // Added Content-Type header
+      },
+      body: JSON.stringify({
+        title,
+        desc: value,
+        img: media,
+        slug: slugify(title),
+        catSlug: catSlug || 'style' // If not selected, choose the general category
+      })
+    })
 
     if (res.status === 200) {
       const data = await res.json()

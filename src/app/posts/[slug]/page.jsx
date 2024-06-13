@@ -4,24 +4,24 @@ import Menu from '@/components/menu/Menu'
 import Image from 'next/image'
 import Comments from '@/components/comments/Comments'
 
-// const getData = async slug => {
-//   try {
-//     const res = await fetch(`http://localhost:3000/api/posts/${slug}`, {
-//       cache: 'no-store'
-//     })
+const getData = async slug => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/posts/${slug}`, {
+      cache: 'no-store'
+    })
 
-//     if (!res.ok) {
-//       console.error(`Error: ${res.status} ${res.statusText}`)
-//       return null // Handle the error as needed
-//     }
+    if (!res.ok) {
+      console.error(`Error: ${res.status} ${res.statusText}`)
+      return null // Handle the error as needed
+    }
 
-//     const data = await res.json() // Directly parse JSON
-//     return data
-//   } catch (error) {
-//     console.error('Fetch error:', error)
-//     return null // Handle the error as needed
-//   }
-// }
+    const data = await res.json() // Directly parse JSON
+    return data
+  } catch (error) {
+    console.error('Fetch error:', error)
+    return null // Handle the error as needed
+  }
+}
 
 const Page = async ({ params }) => {
   const { slug } = params
