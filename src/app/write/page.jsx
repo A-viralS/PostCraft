@@ -1,5 +1,6 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import styles from './writePage.module.css'
 import { useEffect, useState } from 'react'
@@ -12,9 +13,10 @@ import {
   getDownloadURL
 } from 'firebase/storage'
 import { app } from '@/utils/firebase'
-
-import ReactQuill from 'react-quill'
 import { useSession } from 'next-auth/react'
+
+// Dynamically import ReactQuill with SSR disabled
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
 const WritePage = () => {
   const router = useRouter()
@@ -27,38 +29,40 @@ const WritePage = () => {
   const [catSlug, setCatSlug] = useState('')
 
   useEffect(() => {
-    const storage = getStorage(app)
+    if (typeof window !== 'undefined') {
+      const storage = getStorage(app)
 
-    const upload = () => {
-      const name = new Date().getTime() + file.name
-      const storageRef = ref(storage, name)
+      const upload = () => {
+        const name = new Date().getTime() + file.name
+        const storageRef = ref(storage, name)
 
-      const uploadTask = uploadBytesResumable(storageRef, file)
+        const uploadTask = uploadBytesResumable(storageRef, file)
 
-      uploadTask.on(
-        'state_changed',
-        snapshot => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          console.log('Upload is ' + progress + '% done')
-          switch (snapshot.state) {
-            case 'paused':
-              console.log('Upload is paused')
-              break
-            case 'running':
-              console.log('Upload is running')
-              break
+        uploadTask.on(
+          'state_changed',
+          snapshot => {
+            const progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            console.log('Upload is ' + progress + '% done')
+            switch (snapshot.state) {
+              case 'paused':
+                console.log('Upload is paused')
+                break
+              case 'running':
+                console.log('Upload is running')
+                break
+            }
+          },
+          error => {},
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
+              setMedia(downloadURL)
+            })
           }
-        },
-        error => {},
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
-            setMedia(downloadURL)
-          })
-        }
-      )
+        )
+      }
+      file && upload()
     }
-    file && upload()
   }, [file])
 
   if (status === 'loading') {
@@ -96,6 +100,7 @@ const WritePage = () => {
       console.error('Failed to create post:', await res.json())
     }
   }
+
   return (
     <div className={styles.container}>
       <input
@@ -121,12 +126,12 @@ const WritePage = () => {
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 24 24'
             fill='currentColor'
-            class='size-6'
+            className='size-6'
           >
             <path
-              fill-rule='evenodd'
+              fillRule='evenodd'
               d='M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z'
-              clip-rule='evenodd'
+              clipRule='evenodd'
             />
           </svg>
         </button>
@@ -154,13 +159,13 @@ const WritePage = () => {
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none'
                 viewBox='0 0 24 24'
-                stroke-width='1.5'
+                strokeWidth='1.5'
                 stroke='currentColor'
-                class='size-6'
+                className='size-6'
               >
                 <path
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
                   d='M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25'
                 />
               </svg>
