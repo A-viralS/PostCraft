@@ -1,53 +1,134 @@
 .container {
   margin-top: 30px;
+  max-width: 100%;
+  width: 100vw; /* Ensure full width */
+ 
 }
 
 .title {
+  
   font-size: 96px;
   font-weight: 300;
+  color:#373FF9
+}
+.box_top_bottom {
+  --mask:
+  radial-gradient(17.61px at 50% 24.75px,#000 99%,#0000 101%) calc(50% - 22px) 0/44px 51% repeat-x,
+  radial-gradient(17.61px at 50% -13.75px,#0000 99%,#000 101%) 50% 11px/44px calc(51% - 11px) repeat-x,
+  radial-gradient(17.61px at 50% calc(100% - 24.75px),#000 99%,#0000 101%) calc(50% - 22px) 100%/44px 51% repeat-x,
+  radial-gradient(17.61px at 50% calc(100% + 13.75px),#0000 99%,#000 101%) 50% calc(100% - 11px)/44px calc(51% - 11px) repeat-x;
+-webkit-mask: var(--mask);
+        mask: var(--mask);
+  
+        border-radius: 20px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  padding-right: 20px;
+  justify-content: space-between;
+
+height: 460px;
+
+
+
+background-color: #555bf6;
 }
 
+
+.box_bottom {
+  --mask:
+
+  radial-gradient(3.94px at 50% calc(100% - 5.55px),#000 99%,#0000 101%) calc(50% - 6px) 0/12px 100%,
+  radial-gradient(3.94px at 50% calc(100% + 2.55px),#0000 99%,#000 101%) 50% calc(100% - 3px)/12px 100% repeat-x;
+-webkit-mask: var(--mask);
+        mask: var(--mask);
+}
 .post {
   margin-top: 60px;
-  display: flex;
-  align-items: center;
-  gap: 50px;
+
+}
+.featured {
+  font-family:fantasy;
+
+margin-left: 1000px;
+height: 120px;
+width: 73px;
+padding-left:5px;
+padding-right: 5px;
+
+  background-color: #F1516C; /* Background color of the button */
+  color: #fff; /* Text color */
+  padding-top:80px;
+position: absolute;
 }
 
 .imgContainer {
   flex: 1;
-  height: 500px;
   position: relative;
+  height: 300px; /* Ensure the height is defined */
 }
 
 .image {
   object-fit: cover;
   border-radius: 30px;
+  width: 100%; /* Ensure the image takes full width */
+  height: 100%; /* Ensure the image takes full height */
+  position: absolute; /* Position the image absolutely within its container */
+  top: 0;
+  left: 0;
+}
+.outerbox{
+   padding-top: 110px
 }
 
 .textContainer {
   flex: 1;
+ 
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
+.user{
+  font-family : cursive;
+  font-size: 20px;
+  color: #F1516C;
+}
 .postTitle {
   font-size: 40px;
+    color: white;
+    font-family: 'nunito';
 }
 
 .postDesc {
   font-size: 20px;
   font-weight: 300;
   color: var(--softTextColor);
+  font-family: monospace;
+
+
 }
 
-.button {
-  padding: 16px 20px;
-  border: none;
-  border-radius: 5px;
-  width: max-content;
+.link {
+  color:white;
+  font-size: 20px;
+  font-family: fantasy;
+  right: 0;
+width: 100%;
+right: 0cm;
+position: relative;
+
 }
+.button{
+position: absolute;
+  right: 0;
+
+}
+.link:hover {
+  text-decoration: underline;
+  color: #F1516C;
+
+}
+
 
 @media screen and (max-width: 1280px) {
   .title {

@@ -3,6 +3,7 @@ import styles from './CardList.module.css'
 import Pagination from '../pagination/Pagination'
 import Menu from '../menu/Menu'
 import Card from '../card/Card'
+import { nunito } from '@/utils/fonts'
 const getData = async (page, cat) => {
   try {
     const res = await fetch(
@@ -48,7 +49,16 @@ const CardList = async ({ page, cat }) => {
   const hasPrev = POSTS_PER_PAGE * (page - 1) > 0
   return (
     <div className={styles.container}>
-      <div className={styles.title}> Recent posts </div>
+      <div className={styles.title}>
+        <span style={{ color: '#373FF9', font: 'nunito' }} className={nunito}>
+          {' '}
+          Recent
+        </span>
+        <span> </span>
+        <span style={{ color: '#F1516C', font: 'nunito' }} className={nunito}>
+          Posts{' '}
+        </span>
+      </div>
       <div className={styles.posts}>
         {posts?.length > 0 ? (
           posts.map(post => <Card key={post._id} post={post} />)

@@ -1,11 +1,21 @@
 .title{
-    background-color: coral;
-    color: white;
-    padding: 5px 10px;
+  color: white;
+
+
     text-align: center;
     text-transform: capitalize;
+
+    font-family:Georgia, 'Times New Roman', Times, serif;
   }
-  
+  .box {
+    --mask:
+      radial-gradient(61.77px at 50% 84px,#000 99%,#0000 101%) calc(50% - 60px) 0/120px 51% repeat-x,
+      radial-gradient(61.77px at 50% -54px,#0000 99%,#000 101%) 50% 30px/120px calc(51% - 30px) repeat-x,
+      radial-gradient(61.77px at 50% calc(100% - 84px),#000 99%,#0000 101%) calc(50% - 60px) 100%/120px 51% repeat-x,
+      radial-gradient(61.77px at 50% calc(100% + 54px),#0000 99%,#000 101%) 50% calc(100% - 30px)/120px calc(51% - 30px) repeat-x;
+    -webkit-mask: var(--mask);
+            mask: var(--mask);
+  }
   .content{
     display: flex;
     gap: 50px;

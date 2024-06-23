@@ -1,10 +1,13 @@
 .container {
 
+
 }
 
 .title {
   margin: 50px 10px;
-  font-family: monospace;
+
+  color: #373FF9;
+  font-weight: 900;
 
 }
 
@@ -26,27 +29,27 @@
   border-radius: 10px;
 }
 
-.category.style {
+.category.interviews {
   background-color: #57c4ff31;
 }
 
-.category.fashion {
+.category.startUps {
   background-color: #da85c731;
 }
 
-.category.food {
+.category.placements {
   background-color: #7fb88133;
 }
 
-.category.travel {
+.category.AIML {
   background-color: #ff795736;
 }
 
-.category.culture {
+.category.openSource {
   background-color: #ffb04f45;
 }
 
-.category.coding {
+.category.collegeLife {
   background-color: #5e4fff31;
 }
 

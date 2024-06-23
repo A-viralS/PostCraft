@@ -17,11 +17,13 @@ const Login = () => {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
-        <div className={styles.socialButton} onClick={() => signIn('google')}>
+        <div
+          className={`${styles.socialButton} ${styles.box}`}
+          onClick={() => signIn('google')}
+        >
           GOOGLE
         </div>
-        <div className={styles.socialButton}>GITHUB</div>
-        <div className={styles.socialButton}>FACEBOOK</div>
+        <div className={`${styles.socialButton} ${styles.box}`}>GITHUB</div>
       </div>
     </div>
   )

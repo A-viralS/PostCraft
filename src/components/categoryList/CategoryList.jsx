@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './CategoryList.module.css'
 import Link from 'next/link'
 import Image from 'next/image'
+import { nunito } from '@/utils/fonts'
 
 const getData = async () => {
   const res = await fetch('https://post-craft.vercel.app/api/categories', {
@@ -17,15 +18,20 @@ const getData = async () => {
 }
 const CategoryList = async () => {
   const data = await getData()
-
   return (
     <div className={styles.container}>
       <div>
-        <h1 className={styles.title}> Popular Categories</h1>
+        <h1 className={`${styles.title} ${nunito}`}>
+          Popular
+          <span style={{ color: '#F1516C' }} className={nunito}>
+            {' '}
+            Categories
+          </span>
+        </h1>
         <div className={styles.categories}>
           {data?.map(item => (
             <Link
-              href='/blog?cat=style'
+              href={`/blog?cat=${item.slug}`}
               className={`${styles.category} ${styles[item.slug]}`}
               key={item._id}
             >

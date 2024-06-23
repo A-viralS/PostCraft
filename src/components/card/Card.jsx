@@ -15,14 +15,19 @@ const Card = ({ post, key }) => {
       <div className={styles.textContainer}>
         <div className={styles.detail}>
           <span className={styles.date}>{post.createdAt.substring(0, 10)}</span>
-          <span className={`${styles.category}`}>{post.catSlug}</span>
+          <Link
+            href={`/blog?cat=${post.catSlug}`}
+            className={`${styles.category}`}
+          >
+            {post.catSlug}
+          </Link>
         </div>
         <Link href={`/posts/${post.slug}`}>
           <h1>{post.title}</h1>
         </Link>
         <p
           className={styles.desc}
-          dangerouslySetInnerHTML={{ __html: post.desc }}
+          dangerouslySetInnerHTML={{ __html: post.desc.slice(0, 100) + '...' }}
         ></p>
         <Link href={`/posts/${post.slug}`} className={styles.link}>
           Read more{' '}

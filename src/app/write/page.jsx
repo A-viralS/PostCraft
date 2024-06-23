@@ -112,12 +112,12 @@ const WritePage = () => {
         className={styles.select}
         onChange={e => setCatSlug(e.target.value)}
       >
-        <option value='style'>Style</option>
-        <option value='fashion'>Fashion</option>
-        <option value='food'>food</option>
-        <option value='culture'>culture</option>
-        <option value='travel'>travel</option>
-        <option value='coding'>coding</option>
+        <option value='openSource'>Open Source</option>
+        <option value='AIML'>AI/ML</option>
+        <option value='collegeLife'>College Life </option>
+        <option value='placements'>Placements</option>
+        <option value='interviews'>Interviews</option>
+        <option value='Startups'>Start Ups </option>
       </select>
       <div className={styles.editor}>
         <button className={styles.button} onClick={() => setOpen(!open)}>
@@ -189,9 +189,9 @@ const WritePage = () => {
           placeholder='Tell your story...'
         />
       </div>
-      <button className={styles.publish} onClick={handleSubmit}>
+      <div className={styles.box} onClick={handleSubmit}>
         Publish
-      </button>
+      </div>
     </div>
   )
 }

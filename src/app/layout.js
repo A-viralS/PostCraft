@@ -5,29 +5,37 @@ import Footer from '@/components/footer/Footer'
 import { ThemeContextProvider } from '@/Context/ThemeContext'
 import ThemeProvider from '@/Providers/ThemeProvider'
 import AuthProvider from '@/Providers/AuthProvider'
+import {Nunito} from 'next/font/google'
+
 
 const inter = Inter({ subsets: ['latin'] })
+const nunito = Nunito({ subsets: ["latin"], weight: ['900'], variable: '--font-nunito' });
+
 
 export const metadata = {
   title: 'PostCraft',
   description: 'Looking for the one? well you are looking at the one!',
 }
 
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+    
+      <body className={`${inter.className} ${nunito.variable}`}>
         <AuthProvider>
 
         <ThemeContextProvider>
           <ThemeProvider>
 
-        <div className='container'>  
+        <div className='container'> 
+        <Navbar/> 
         <div className='wrapper'>    
-        <Navbar/>
+       
         {children}
-        <Footer/>
+    
         </div>
+        <Footer/>
         </div>    
           </ThemeProvider>
         </ThemeContextProvider>    

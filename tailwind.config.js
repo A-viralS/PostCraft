@@ -4,7 +4,12 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {fontFamily:{
+      dance:["var(--font-dance)"],
+      nunito:["var(--font-nunito)"],
+      inter:["var(--font-inter)"],
+       },},
+    
   },
   plugins: [],
 }

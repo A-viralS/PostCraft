@@ -46,6 +46,8 @@
     flex: 1;
     height: 350px;
     position: relative;
+    padding-left: 80px;
+    padding-right: 80px;
   }
   
   .image {
@@ -92,4 +94,8 @@
     .description p{
       font-size: 18px;
     }
+  }
+  .container{
+    padding-left: 80px;
+    padding-right: 80px;
   }

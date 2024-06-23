@@ -1,34 +1,95 @@
 import React from 'react'
 import styles from './Featured.module.css'
 import Image from 'next/image'
-const Featured = () => {
-  return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>
-        <b>Hey its you here! Good to see you. </b>
-      </h1>
+import Link from 'next/link'
+import Intro from '../intro/Intro'
+import { nunito } from '@/utils/fonts'
 
-      <div className={styles.post}>
-        <div className={styles.imgContainer}>
-          <Image src='/p1.jpeg' alt='p1image' fill className={styles.image} />
-        </div>
-        <div className={styles.textContainer}>
-          <h1 className={styles.postTitle}>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum
-            expedita porro ab illum error.
+const getData = async () => {
+  const res = await fetch('https://post-craft.vercel.app/api/menu', {
+    cache: 'no-store'
+  })
+  // const res = await fetch('http://localhost:3000/api/featured', {
+  //   cache: 'no-store'
+  // })
+  if (!res.ok) {
+    throw new Error('Something went wrong')
+  }
+  return res.json()
+}
+const Featured = async () => {
+  const posts = await getData()
+  // console.log('post in feartured:', posts)
+  return (
+    <>
+      <div>
+        <div className={styles.container} style={{ margin: '0px' }}>
+          <h1 className={`${styles.title} ${nunito}`}>
+            Hello{' '}
+            <span style={{ display: 'inline', color: '#F1516C' }}>
+              <Intro />
+            </span>
+            ! What&apos;s on your
+            <span> </span>
+            <p style={{ display: 'inline', color: '#F1516C' }}>mind today?</p>
           </h1>
-          <p className={styles.postDesc}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Est ipsum
-            praesentium, dicta facere, impedit vitae enim aperiam nesciunt sequi
-            quae perspiciatis saepe? Reiciendis dicta aspernatur dolor, id
-            itaque autem perspiciatis aliquid esse animi incidunt facere
-            provident. Earum asperiores fugiat aliquam, ducimus libero a iste ad
-            sequi quidem id esse labore.
-          </p>
-          <button className={styles.button}>Read More </button>
+
+          {posts.map(post => (
+            <div className={`${styles.post} ${styles.box_top_bottom}`}>
+              <div className={`${styles.featured} ${styles.box_bottom}`}>
+                <p>Featured</p>
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '120px'
+                }}
+                className={styles.outerbox}
+              >
+                <div className={styles.imgContainer}>
+                  <Image
+                    src={post.img}
+                    alt='p1image'
+                    fill
+                    layout='fill'
+                    className={styles.image}
+                  />
+                </div>
+
+                <div className={styles.textContainer}>
+                  <h1 className={`${styles.postTitle} ${nunito}`}>
+                    {post.title}
+                  </h1>
+
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: post.desc.slice(0, 100) + '...'
+                    }}
+                    style={{
+                      fontFamily: 'monospace',
+                      fontWeight: '900',
+                      fontSize: '1rem'
+                    }}
+                  ></div>
+
+                  <span className={styles.user}> - {post.user.name}</span>
+                  <div className={styles.link}>
+                    <Link
+                      href={`/posts/${post.slug}`}
+                      className={styles.button}
+                    >
+                      Read More
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
