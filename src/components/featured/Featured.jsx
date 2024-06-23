@@ -37,7 +37,7 @@ const Featured = async () => {
           {posts.map(post => (
             <div
               className={`${styles.post} ${styles.box_top_bottom}`}
-              key={post}
+              key={post._id}
             >
               <div className={`${styles.featured} ${styles.box_bottom}`}>
                 <p>Featured</p>
