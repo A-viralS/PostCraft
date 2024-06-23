@@ -19,7 +19,7 @@ const Footer = () => {
             Welcome to PostCraft! 🌟 Dive into the world of technology with us,
             where we explore, innovate, and share insights that matter to
             college students. Join our vibrant community, stay curious, stay
-            inspired, and let's build the future together!
+            inspired, and let us build the future together!
           </p>
         </div>
         <div className={styles.links}>
