@@ -6,7 +6,7 @@ import Intro from '../intro/Intro'
 import { nunito } from '@/utils/fonts'
 
 const getData = async () => {
-  const res = await fetch('https://post-craft.vercel.app/api/menu', {
+  const res = await fetch('https://post-craft.vercel.app/api/featured', {
     cache: 'no-store'
   })
   // const res = await fetch('http://localhost:3000/api/featured', {
