@@ -38,7 +38,9 @@ color: whitesmoke;
     margin-left: 20px;
   
   }
-  
+  .logo:hover{
+    color: #F1516C;
+  }
   .links {
     display: flex;
     align-items: center;

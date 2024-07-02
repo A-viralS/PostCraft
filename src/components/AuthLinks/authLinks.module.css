@@ -2,6 +2,11 @@
     cursor: pointer;
     color: white;
     font-weight: 500;
+    transition: transform 0.3s ease ;
+  }
+
+  .link:hover{
+    transform: translateY(-5px)
   }
   .box {
     --mask:
