@@ -18,12 +18,12 @@ const getData = async () => {
 
 const Menu = async ({ page }) => {
   const posts = await getData()
-  console.log('posts in menu:', posts)
+  // console.log('posts in menu:', posts)
   return (
     <div className={styles.container}>
       <h2 className={styles.subtitle}>What&apos;s hot?!</h2>
       <h1 className={styles.title}>Most Popular</h1>
-      <div className={styles.items}>
+      <div className={`${styles.items} ${styles.box}`}>
         {posts?.map(post => (
           <Link
             href={`/posts/${post.slug}`}

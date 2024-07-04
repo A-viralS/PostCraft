@@ -1,4 +1,5 @@
 'use client'
+
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import styles from './writePage.module.css'
@@ -17,15 +18,15 @@ import { useSession } from 'next-auth/react'
 // Dynamically import ReactQuill with SSR disabled
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
-const WritePage = () => {
+const EditPage = ({ post }) => {
   const router = useRouter()
   const { status } = useSession()
   const [open, setOpen] = useState(false)
   const [file, setFile] = useState(null)
-  const [media, setMedia] = useState('')
-  const [value, setValue] = useState('')
-  const [title, setTitle] = useState('')
-  const [catSlug, setCatSlug] = useState('')
+  const [media, setMedia] = useState(post.img || '')
+  const [value, setValue] = useState(post.desc || '')
+  const [title, setTitle] = useState(post.title || '')
+  const [catSlug, setCatSlug] = useState(post.catSlug || '')
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -68,48 +69,38 @@ const WritePage = () => {
     return <div className={styles.loading}>Loading...</div>
   }
 
-  const slugify = str =>
-    str
-      .toLowerCase()
-      .trim()
-      .replace(/[^\w\s-]/g, '')
-      .replace(/[\s_-]+/g, '-')
-      .replace(/^-+|-+$/g, '')
-
   const handleSubmit = async () => {
-    // const res = await fetch('http://localhost:3000/api/posts', {
-    //   method: 'POST',
+    // const res = await fetch(`http://localhost:3000/api/posts/${post.slug}`, {
+    //   method: 'PUT',
     //   headers: {
-    //     'Content-Type': 'application/json' // Added Content-Type header
+    //     'Content-Type': 'application/json'
     //   },
     //   body: JSON.stringify({
     //     title,
     //     desc: value,
     //     img: media,
-    //     slug: slugify(title),
-    //     catSlug: catSlug || 'style' // If not selected, choose the general category
+    //     catSlug: catSlug || 'style'
     //   })
     // })
-    const res = await fetch('https://post-craft.vercel.app/api/posts', {
-      method: 'POST',
+    const res = await fetch(`https://post-craft.vercel.app/api/${post.slug}`, {
+      method: 'PUT',
       headers: {
-        'Content-Type': 'application/json' // Added Content-Type header
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         title,
         desc: value,
         img: media,
-        slug: slugify(title),
-        catSlug: catSlug || 'style' // If not selected, choose the general category
+        catSlug: catSlug || 'style'
       })
     })
 
     if (res.status === 200) {
       const data = await res.json()
-      console.log('data slug in write page ', data.slug)
-      router.push(`/posts/${data.slug}`) // Corrected the template string
+      console.log('data slug in edit page ', data.slug)
+      router.replace(`/posts/${data.slug}`)
     } else {
-      console.error('Failed to create post:', await res.json())
+      console.error('Failed to update post:', await res.json())
     }
   }
 
@@ -119,10 +110,12 @@ const WritePage = () => {
         type='text'
         placeholder='Title'
         className={styles.input}
+        value={title}
         onChange={e => setTitle(e.target.value)}
       />
       <select
         className={styles.select}
+        value={catSlug}
         onChange={e => setCatSlug(e.target.value)}
       >
         <option value='openSource'>Open Source</option>
@@ -209,4 +202,4 @@ const WritePage = () => {
   )
 }
 
-export default WritePage
+export default EditPage

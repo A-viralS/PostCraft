@@ -63,7 +63,7 @@ const Footer = () => {
               LinkedIn
             </Link>
             <Link
-              href='/https://www.instagram.com/joe.aviral?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=='
+              href='https://www.instagram.com/joe.aviral/'
               style={{ display: 'flex', alignItems: 'center', gap: '5px' }}
             >
               <Image src={'/instagram.png'} width={20} height={20}></Image>

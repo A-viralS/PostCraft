@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 const Pagination = ({ page, hasPrev, hasNext }) => {
   const router = useRouter()
 
-  const handlNext = () => {
+  const handleNext = () => {
     router.push(`?page=${page + 1}`)
   }
   const handlePrev = () => {
@@ -14,19 +14,20 @@ const Pagination = ({ page, hasPrev, hasNext }) => {
   }
   return (
     <div className={styles.container}>
-      <button
-        className={styles.button}
+      <div
+        className={`${styles.button} ${styles.box}`}
         disabled={!hasPrev}
         onClick={handlePrev}
       >
         Previous
-      </button>
-      <button
-       disabled={!hasNext} 
-       className={styles.button} 
-       onClick={handlNext}>
+      </div>
+      <div
+        disabled={!hasNext}
+        className={`${styles.button} ${styles.box}`}
+        onClick={handleNext}
+      >
         Next
-      </button>
+      </div>
     </div>
   )
 }

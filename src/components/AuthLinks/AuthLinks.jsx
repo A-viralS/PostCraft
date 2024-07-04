@@ -7,49 +7,34 @@ import { signOut, useSession } from 'next-auth/react'
 const AuthLinks = () => {
   const { data, status } = useSession()
 
-  const [open, setOpen] = useState(false)
+  // const [open, setOpen] = useState(false)
 
   return (
     <>
-      {status === 'unauthenticated' ? (
-        <div className={styles.box}>
-          <Link href='/login' className={styles.link}>
-            {' '}
-            Login
-          </Link>
-        </div>
-      ) : (
-        <>
-          <Link href='/write' className={`${styles.link} ${styles.box}`}>
-            Write
-          </Link>
-          <span className={`${styles.link} ${styles.box}`} onClick={signOut}>
-            Logout
-          </span>
-        </>
-      )}
-      <div className={styles.burger} onClick={() => setOpen(!open)}>
-        <div className={styles.line}></div>
-        <div className={styles.line}></div>
-        <div className={styles.line}></div>
-      </div>
-      {open && (
-        <div className={styles.responsiveMenu}>
-          <Link href='/'>HomePage</Link>
-          <Link href='/Contact'>Contact</Link>
-          <Link href='/about'>About</Link>
-          {status === 'unauthenticated' ? (
-            <Link href='/login'> Login</Link>
-          ) : (
-            <>
-              <Link href='/write'>Write</Link>
-              <span className={styles.link} onClick={signOut}>
+      <div className={styles.outerBox}>
+        {status === 'unauthenticated' ? (
+          <div className={styles.box}>
+            <Link href='/login' className={styles.link}>
+              {' '}
+              Login
+            </Link>
+          </div>
+        ) : (
+          <>
+            <div style={{ display: 'flex ', gap: '10px' }}>
+              <Link href='/write' className={`${styles.link} ${styles.box}`}>
+                Write
+              </Link>
+              <span
+                className={`${styles.link} ${styles.box}`}
+                onClick={signOut}
+              >
                 Logout
               </span>
-            </>
-          )}
-        </div>
-      )}
+            </div>
+          </>
+        )}
+      </div>
     </>
   )
 }

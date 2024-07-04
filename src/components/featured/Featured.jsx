@@ -40,7 +40,7 @@ const Featured = async () => {
               key={post._id}
             >
               <div className={`${styles.featured} ${styles.box_bottom}`}>
-                <p>Featured</p>
+                <p className={styles.featuredText}>Featured</p>
               </div>
               <div
                 style={{
@@ -62,9 +62,12 @@ const Featured = async () => {
                 </div>
 
                 <div className={styles.textContainer}>
-                  <h1 className={`${styles.postTitle} ${nunito}`}>
+                  <Link
+                    href={`/posts/${post.slug}`}
+                    className={`${styles.postTitle} ${nunito}`}
+                  >
                     {post.title}
-                  </h1>
+                  </Link>
 
                   <div
                     dangerouslySetInnerHTML={{

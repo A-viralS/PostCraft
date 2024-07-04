@@ -1,9 +1,9 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './comments.module.css'
 import Link from 'next/link'
 import Image from 'next/image'
-import useSWR, { mutate } from 'swr'
+import useSWR from 'swr'
 import { useSession } from 'next-auth/react'
 
 const fetcher = async url => {
@@ -14,24 +14,31 @@ const fetcher = async url => {
   }
   return data
 }
+
 const Comments = ({ postSlug }) => {
-  const [desc, setDesc] = React.useState('')
+  const [desc, setDesc] = useState('')
   const { status } = useSession()
-  const { data, isLoading } = useSWR(
-    `https://post-craft.vercel.app/api/comments?postSlug=${postSlug}`,
-    fetcher
-  )
-  // const { data, isLoading } = useSWR(
+  // const { data, mutate, isLoading } = useSWR(
   //   `http://localhost:3000/api/comments?postSlug=${postSlug}`,
   //   fetcher
   // )
+  const { data, mutate, isLoading } = useSWR(
+    `https://post-craft.vercel.app/api/comments?postSlug=${postSlug}`,
+    fetcher
+  )
+
   const handleSubmit = async () => {
     await fetch('/api/comments', {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({ desc, postSlug })
     })
     mutate()
+    setDesc('') // Reset the desc state to an empty string
   }
+
   console.log('comments:', data?.desc, isLoading)
   return (
     <div className={styles.container}>
@@ -41,6 +48,7 @@ const Comments = ({ postSlug }) => {
           <textarea
             className={styles.input}
             placeholder='Write a comment'
+            value={desc}
             onChange={e => setDesc(e.target.value)}
           ></textarea>
           <button className={styles.button} onClick={handleSubmit}>

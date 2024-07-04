@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react'
 import styles from './CatOptions.module.css'
 
 const getData = async () => {
-  const res = await fetch('http://localhost:3000/api/categories', {
-    cache: 'no-store'
-  })
+  // const res = await fetch('http://localhost:3000/api/categories', {
+  //   cache: 'no-store'
+  // })
+  const res= await fetch('https://post-craft.vercel.app/api/categories')
   if (!res.ok) {
     throw new Error('Something went wrong')
   }
@@ -14,7 +15,7 @@ const getData = async () => {
 
 const CatOptions = async ({ setCatSlug }) => {
   const categories = await getData()
-  console.log('categories:', categories)
+
 
   return (
     <select
