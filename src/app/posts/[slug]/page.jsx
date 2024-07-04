@@ -10,7 +10,10 @@ import PostActions from '@/components/PostActions/postActions'
 
 const getData = async slug => {
   try {
-    const res = await fetch(`http://localhost:3000/api/posts/${slug}`, {
+    // const res = await fetch(`http://localhost:3000/api/posts/${slug}`, {
+    //   cache: 'no-store'
+    // })
+    const res = await fetch(`https://post-craft.vercel.app/api/posts/${slug}`, {
       cache: 'no-store'
     })
 
