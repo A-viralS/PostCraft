@@ -43,7 +43,7 @@ const PostActions = ({ post, currUser }) => {
     <div className={styles.edit}>
       {post.user.email === currUser ? (
         <>
-          <p className={styles.editText}> oh that's your post!</p>
+          <p className={styles.editText}> oh that`&apos;` your post!</p>
           <div className={styles.editButtons}>
             <Link href={`/edit/${post.slug}`} className={styles.box}>
               Edit
