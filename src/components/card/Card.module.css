@@ -1,55 +1,73 @@
 .container {
-    margin-bottom: 50px;
-    display: flex;
-    align-items: center;
-    gap: 50px;
-  }
-  
-  .imgContainer {
-    flex: 1;
-    height: 350px;
-    position: relative;
-  }
-  
-  .image {
-    object-fit: cover;
-    border-radius: 30px;
-  }
-  
-  .textContainer {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-  }
-  
-  .date {
-    color: gray;
-  }
-  
-  .category {
-    color: crimson;
-    font-weight: 500;
-    margin-left: 20px;
+  margin-bottom: 50px;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
 
-    text-transform: uppercase;
+.imgContainer {
+  position: relative; /* Ensure relative positioning */
+  width: 100%;
+  height: 350px; /* Set a fixed height for the container */
+  border-radius: 40px;
+
+}
+
+.image {
+  object-fit: cover;
+  width: 100%; /* Ensure the image takes full width */
+  height: 100%; /* Ensure the image takes full height */
+  position: absolute; /* Position the image absolutely within its container */
+  top: 0;
+  left: 0;
+  border-radius: 40px;
+
+}
+
+.textContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.date {
+  color: gray;
+}
+
+.category {
+  color: crimson;
+  font-weight: 500;
+  margin-left: 20px;
+  text-transform: uppercase;
+}
+
+.desc {
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--softTextColor);
+}
+
+.link {
+  border-bottom: 1px solid crimson;
+  width: max-content;
+  padding: 2px 0px;
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    flex-direction: column;
+    height: auto; /* Adjust height as necessary */
   }
-  
-  .desc {
-    font-size: 18px;
-    font-weight: 300;
-    color: var(--softTextColor);
+
+  .imgContainer {
+    height: 200px; /* Adjust height for mobile */
+    padding: 10px;
   }
-  
-  .link {
-    border-bottom: 1px solid crimson;
-    width: max-content;
-    padding: 2px 0px;
+
+  .image {
+    height: 100%; /* Ensure the image takes full height */
+    border-radius: 40px;
+    padding: 10px;
   }
-  
-  @media screen and (max-width: 1280px) {
-    .imageContainer {
-      display: none;
-    }
-  }
-  
+}

@@ -14,6 +14,8 @@ import {
 } from 'firebase/storage'
 import { app } from '@/utils/firebase'
 import { useSession } from 'next-auth/react'
+import { nunito } from '@/utils/fonts'
+import CategoryOptions from '@/components/CategoryOptions/CategoryOptions'
 
 // Dynamically import ReactQuill with SSR disabled
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
@@ -112,21 +114,43 @@ const EditPage = ({ post }) => {
         className={styles.input}
         value={title}
         onChange={e => setTitle(e.target.value)}
+        style={{ fontFamily: 'fantasy' }}
       />
-      <select
-        className={styles.select}
-        value={catSlug}
-        onChange={e => setCatSlug(e.target.value)}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'between',
+          margin: '0 0 10px 0',
+          fontFamily: 'nunito',
+          fontWeight: 'bold',
+          gap: '10px'
+        }}
       >
-        <option value='openSource'>Open Source</option>
-        <option value='AIML'>AI/ML</option>
-        <option value='collegeLife'>College Life </option>
-        <option value='placements'>Placements</option>
-        <option value='interviews'>Interviews</option>
-        <option value='Startups'>Start Ups </option>
-      </select>
+        <p> 📚 Choose your blog&apos;s category! </p>
+        <CategoryOptions setCatSlug={setCatSlug} />
+      </div>
       <div className={styles.editor}>
-        <button className={styles.button} onClick={() => setOpen(!open)}>
+        <p style={{ fontFamily: 'nunito', fontWeight: 'bold' }}>
+          {' '}
+          📸 Choose an image for your blog!
+        </p>
+        <button className={styles.button} style={{ margin: '0 0 0 10px' }}>
+          <label htmlFor='image'>
+            <Image
+              src='/image.png'
+              alt=''
+              width={32}
+              height={32}
+              style={{ padding: '3px' }}
+            />
+          </label>
+          <input
+            type='file'
+            id='image'
+            onChange={e => setFile(e.target.files[0])}
+            style={{ display: 'none' }}
+          />
           <svg
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 24 24'
@@ -140,14 +164,9 @@ const EditPage = ({ post }) => {
             />
           </svg>
         </button>
+
         {open && (
           <div className={styles.add}>
-            <input
-              type='file'
-              id='image'
-              onChange={e => setFile(e.target.files[0])}
-              style={{ display: 'none' }}
-            />
             <button className={styles.addButton}>
               <label htmlFor='image'>
                 <Image
@@ -159,42 +178,17 @@ const EditPage = ({ post }) => {
                 />
               </label>
             </button>
-            <button className={styles.addButton}>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                strokeWidth='1.5'
-                stroke='currentColor'
-                className='size-6'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25'
-                />
-              </svg>
-            </button>
-            <button className={styles.addButton}>
-              <Image
-                src='/video.png'
-                alt=''
-                width={32}
-                height={32}
-                style={{ padding: '2px' }}
-              />
-            </button>
           </div>
         )}
-        <ReactQuill
-          className={styles.textArea}
-          style={{ marginTop: '30px' }}
-          theme='bubble'
-          value={value}
-          onChange={setValue}
-          placeholder='Tell your story...'
-        />
       </div>
+      <ReactQuill
+        className={styles.textArea}
+        style={{ marginTop: '60px', fontFamily: 'nunito' }}
+        theme='bubble'
+        value={value}
+        onChange={setValue}
+        placeholder='Tell your story... tip: select the text to format it!✨ ✨, paste any picture you want as well'
+      />
       <div className={styles.box} onClick={handleSubmit}>
         Publish
       </div>

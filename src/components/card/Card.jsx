@@ -3,14 +3,18 @@ import styles from './Card.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
 import { nunito } from '@/utils/fonts'
-const Card = ({ post, key }) => {
-  // console.log('inside Card', post)
 
+const Card = ({ post, key }) => {
   return (
     <div className={styles.container} key={key}>
       <div className={styles.imgContainer}>
         {post.img && (
-          <Image src={post.img} alt='p1image' fill className={styles.image} />
+          <Image
+            src={post.img}
+            alt='Post Image'
+            layout='fill'
+            className={styles.image}
+          />
         )}
       </div>
       <div className={styles.textContainer}>
@@ -28,11 +32,13 @@ const Card = ({ post, key }) => {
         </Link>
         <p
           className={styles.desc}
-          dangerouslySetInnerHTML={{ __html: post.desc.slice(0, 100) + '...' }}
+          dangerouslySetInnerHTML={{
+            __html: post.desc.slice(0, 100) + '...'
+          }}
         ></p>
         <p style={{ fontFamily: 'fantasy' }}>~{post.user.name}</p>
         <Link href={`/posts/${post.slug}`} className={styles.link}>
-          Read more{' '}
+          Read more
         </Link>
       </div>
     </div>

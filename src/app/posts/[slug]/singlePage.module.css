@@ -71,6 +71,15 @@
     font-weight: 300;
     margin-bottom: 20px;
   }
+  .description {
+    word-wrap: break-word; /* Wrap long words onto the next line */
+    word-break: break-word; /* Break long words at the edge of the container */
+    overflow-wrap: break-word; /* Prevent overflow by breaking words */
+    width: 100%; /* Ensure the description takes up the full width of the container */
+    max-width: 100%; /* Prevent content from exceeding container width */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  }
+  
   
   @media screen and (max-width: 1536px) {
     .title {

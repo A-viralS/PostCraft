@@ -6,33 +6,34 @@ import Intro from '../intro/Intro'
 import { nunito } from '@/utils/fonts'
 
 const getData = async () => {
-  const res = await fetch('https://post-craft.vercel.app/api/featured', {
-    cache: 'no-store'
-  })
   // const res = await fetch('http://localhost:3000/api/featured', {
   //   cache: 'no-store'
   // })
+  const res = await fetch('https://post-craft.vercel.app/api/featured', {
+    cache: 'no-store'
+  })
   if (!res.ok) {
     throw new Error('Something went wrong')
   }
   return res.json()
 }
+
 const Featured = async () => {
   const posts = await getData()
-  // console.log('post in feartured:', posts)
   return (
     <>
       <div>
         <div className={styles.container} style={{ margin: '0px' }}>
-          <h1 className={`${styles.title} ${nunito}`}>
-            Hello{' '}
-            <span style={{ display: 'inline', color: '#F1516C' }}>
-              <Intro />
-            </span>
-            ! What&apos;s on your
-            <span> </span>
-            <p style={{ display: 'inline', color: '#F1516C' }}>mind today?</p>
-          </h1>
+          <div>
+            <p
+              className={`${styles.greeting} ${nunito} `}
+              style={{ fontSize: '50px' }}
+            >
+              <span style={{ color: '#F1516C' }}>
+                <Intro />
+              </span>
+            </p>
+          </div>
 
           {posts.map(post => (
             <div
@@ -42,20 +43,11 @@ const Featured = async () => {
               <div className={`${styles.featured} ${styles.box_bottom}`}>
                 <p className={styles.featuredText}>Featured</p>
               </div>
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '120px'
-                }}
-                className={styles.outerbox}
-              >
+              <div className={styles.mobile}>
                 <div className={styles.imgContainer}>
                   <Image
                     src={post.img}
                     alt='p1image'
-                    fill
                     layout='fill'
                     className={styles.image}
                   />
@@ -78,6 +70,7 @@ const Featured = async () => {
                       fontWeight: '900',
                       fontSize: '1rem'
                     }}
+                    className={styles.postDesc}
                   ></div>
 
                   <span className={styles.user}> - {post.user.name}</span>

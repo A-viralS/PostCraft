@@ -13,14 +13,11 @@ const AuthLinks = () => {
     <>
       <div className={styles.outerBox}>
         {status === 'unauthenticated' ? (
-          <div className={styles.box}>
-            <Link href='/login' className={styles.link}>
-              {' '}
-              Login
-            </Link>
-          </div>
+          <Link href='/login' className={styles.link}>
+            <div className={styles.box}> Login</div>
+          </Link>
         ) : (
-          <>
+          <> 
             <div style={{ display: 'flex ', gap: '10px' }}>
               <Link href='/write' className={`${styles.link} ${styles.box}`}>
                 Write
