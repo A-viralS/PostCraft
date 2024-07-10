@@ -1,7 +1,7 @@
 'use client'
 import { useSession } from 'next-auth/react'
 import React from 'react'
-import styles from './Intro.module.css'
+import styles from './intro.module.css'
 import Typewriter from '../Typewriter/Typewriter'
 import { nunito } from '@/utils/fonts'
 
