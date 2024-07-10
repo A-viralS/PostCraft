@@ -21,7 +21,7 @@ const Intro = () => {
         {data?.user ? data.user.name : ' you'},<br />
         <span className={styles.para}>
           Welcome to our little slice of the web, where stories unfold and ideas
-          flourish. You've found a sanctuary for thinkers, dreamers, and
+          flourish. You&apos;ve found a sanctuary for thinkers, dreamers, and
           storytellers alike. From heartfelt musings to practical wisdom, your
           journey with us is one of discovery and connection.{' '}
           <span style={{ color: '#F1516C' }}>Why not explore... </span>
