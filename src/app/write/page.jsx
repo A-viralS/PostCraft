@@ -147,7 +147,7 @@ const WritePage = () => {
         <button className={styles.button} style={{ margin: '0 0 0 10px' }}>
           <label htmlFor='image'>
             <Image
-              src='/image-gallery.png'
+              src='/image.png'
               alt=''
               width={32}
               height={32}
