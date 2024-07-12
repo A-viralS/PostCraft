@@ -16,20 +16,30 @@ const Intro = () => {
 
   return (
     <div className={styles.intro}>
-      <span style={{ color: '#373FF8' }}>Dear</span>{' '}
-      <span>
-        {data?.user ? data.user.name : ' you'},<br />
+      <div className={styles.greeting}>
+        <span style={{ color: '#373FF8' }} {...nunito}>
+          Dear
+        </span>{' '}
+        <span style={{ color: '#F1516C' }}>
+          {' '}
+          {data?.user ? data.user.name : ' you'},<br />
+        </span>
         <span className={styles.para}>
           Welcome to our little slice of the web, where stories unfold and ideas
-          flourish. You&apos;ve found a sanctuary for thinkers, dreamers, and
+          flourish. You've found a sanctuary for thinkers, dreamers, and
           storytellers alike. From heartfelt musings to practical wisdom, your
-          journey with us is one of discovery and connection.{' '}
-          <span style={{ color: '#F1516C' }}>Why not explore... </span>
-          <span style={{ color: '#F1516C' }}>
-            <Typewriter />
-          </span>
+          journey with us is one of discovery and connection.
         </span>
-      </span>
+      </div>
+      <div className={styles.ques}>
+        <span style={{ color: '#F1516C' }} {...nunito}>
+          <span style={{ color: '#373FF8' }}>Uncertain what to share?</span> Why
+          not explore...{' '}
+        </span>
+        <span style={{ color: '#F1516C' }} {...nunito}>
+          <Typewriter />
+        </span>
+      </div>
     </div>
   )
 }

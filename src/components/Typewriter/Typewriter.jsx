@@ -1,6 +1,7 @@
 import React from 'react'
 import { useTypewriter, Cursor } from 'react-simple-typewriter'
 import styles from './Typewriter.module.css'
+import { nunito } from '@/utils/fonts'
 
 const Typewriter = () => {
   const [text] = useTypewriter({
@@ -40,7 +41,9 @@ const Typewriter = () => {
 
   return (
     <div className={styles.typingContainer}>
-      <span style={{ display: 'inline' }}>{text}</span>
+      <span style={{ display: 'inline' }} {...nunito}>
+        {text}
+      </span>
       <Cursor />
     </div>
   )

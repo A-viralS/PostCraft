@@ -1,16 +1,29 @@
-/* Intro.module.css */
 .intro {
-  line-height: 1.6; /* Adjust line height as needed */
-}
 
-.para {
-  font-size: 30px;
-  color: #626262;
-  /* Additional styles as required */
-}
-@media  screen and (max-width: 480px) {
-  .para {
-    font-size: 20px;
+    line-height: 1.6; /* Adjust line height as needed */
+    color: #626262;
+  
+margin-bottom: 20px;
   }
-    
-}
+  
+  .para {
+    width: 800px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    display: block;
+    line-height: 1.6;
+    font-size: 20px;
+    font-style: italic;
+    margin-top: 10px; /* Adjust spacing between paragraphs */
+  }
+  
+  .ques{
+    height: 100px;
+
+
+  }
+  @media screen and (max-width: 480px) {
+    .para {
+      font-size: 18px; /* Adjust font size for smaller screens */
+    }
+  }
+  
