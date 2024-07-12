@@ -5,14 +5,16 @@
     transition: transform 0.4s ease ;
     padding-bottom: 2px;
   }
-
-
-.outerBox{
-
-  
-
-
+.unAuthButtons{
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
+.unAuthPara{
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #F1516C;
+}
+
 
 
   .link:hover{

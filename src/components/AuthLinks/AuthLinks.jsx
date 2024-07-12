@@ -13,11 +13,15 @@ const AuthLinks = () => {
     <>
       <div className={styles.outerBox}>
         {status === 'unauthenticated' ? (
-          <Link href='/login' className={styles.link}>
-            <div className={styles.box}> Login</div>
-          </Link>
+          <>
+            <div className={styles.unAuthButtons}>
+              <Link href='/login' className={styles.link}>
+                <div className={styles.box}> Login to write</div>
+              </Link>
+            </div>
+          </>
         ) : (
-          <> 
+          <>
             <div style={{ display: 'flex ', gap: '10px' }}>
               <Link href='/write' className={`${styles.link} ${styles.box}`}>
                 Write
