@@ -8,10 +8,11 @@ import { nunito } from '@/utils/fonts'
 const Intro = () => {
   const { data, status } = useSession()
 
+  let firstName = ''
   if (status === 'authenticated' && data?.user) {
-    console.log('sessionData:', data.user.name)
-  } else {
-    console.log('No user is authenticated')
+    const fullName = data.user.name
+    const spaceIndex = fullName.indexOf(' ')
+    firstName = spaceIndex !== -1 ? fullName.substring(0, spaceIndex) : fullName
   }
 
   return (
@@ -23,7 +24,7 @@ const Intro = () => {
           </span>{' '}
           <span style={{ color: '#F1516C' }}>
             {' '}
-            {data?.user ? data.user.name : ' you'},<br />
+            {data?.user ? firstName : 'you'},<br />
           </span>
         </span>
         <span className={styles.para}>
