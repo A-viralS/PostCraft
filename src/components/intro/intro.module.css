@@ -55,6 +55,13 @@
     .para {
       font-size: 12px;
     }
+    .ques{
+        padding: 10px;
+        font-size: 20px;
+        margin-left:10px;
+          
+  
+    }
   }
   
   @media screen and (max-width: 480px) {
@@ -63,7 +70,11 @@
       width: 300px;
     }
     .ques{
+       
         font-size: 20px;
+        margin-left:10px;
+          
+  
     }
     .dearYou{
         font-size: 20px;

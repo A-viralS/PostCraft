@@ -1,4 +1,3 @@
-'use client'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import styles from './writePage.module.css'
@@ -24,13 +23,13 @@ const WritePage = () => {
   const { status } = useSession()
   const [open, setOpen] = useState(false)
   const [file, setFile] = useState(null)
-  const [media, setMedia] = useState('')
+  const [media, setMedia] = useState('/default.jpg') // Default image URL
   const [value, setValue] = useState('')
   const [title, setTitle] = useState('')
   const [catSlug, setCatSlug] = useState('')
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && file) {
       const storage = getStorage(app)
 
       const upload = () => {
@@ -54,7 +53,9 @@ const WritePage = () => {
                 break
             }
           },
-          error => {},
+          error => {
+            console.error('Error uploading image:', error)
+          },
           () => {
             getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
               setMedia(downloadURL)
@@ -62,7 +63,7 @@ const WritePage = () => {
           }
         )
       }
-      file && upload()
+      upload()
     }
   }, [file])
 
@@ -79,37 +80,24 @@ const WritePage = () => {
       .replace(/^-+|-+$/g, '')
 
   const handleSubmit = async () => {
-    // const res = await fetch('http://localhost:3000/api/posts', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json' // Added Content-Type header
-    //   },
-    //   body: JSON.stringify({
-    //     title,
-    //     desc: value,
-    //     img: media,
-    //     slug: slugify(title),
-    //     catSlug: catSlug || 'collegeLife' // If not selected, choose the general category
-    //   })
-    // })
     const res = await fetch('https://post-craft.vercel.app/api/posts', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json' // Added Content-Type header
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         title,
         desc: value,
         img: media,
         slug: slugify(title),
-        catSlug: catSlug || 'collegeLife' // If not selected, choose the general category
+        catSlug: catSlug || 'collegeLife'
       })
     })
 
     if (res.status === 200) {
       const data = await res.json()
       console.log('data slug in write page ', data.slug)
-      router.push(`/posts/${data.slug}`) // Corrected the template string
+      router.push(`/posts/${data.slug}`)
     } else {
       console.error('Failed to create post:', await res.json())
     }
@@ -147,7 +135,7 @@ const WritePage = () => {
         <button className={styles.button} style={{ margin: '0 0 0 10px' }}>
           <label htmlFor='image'>
             <Image
-              src='/image.png'
+              src='/image-gallery.png'
               alt=''
               width={32}
               height={32}

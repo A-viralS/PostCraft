@@ -138,7 +138,7 @@ const EditPage = ({ post }) => {
         <button className={styles.button} style={{ margin: '0 0 0 10px' }}>
           <label htmlFor='image'>
             <Image
-              src='/image.png'
+              src='/image-gallery.png'
               alt=''
               width={32}
               height={32}
