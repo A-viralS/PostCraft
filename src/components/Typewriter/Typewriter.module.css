@@ -7,4 +7,15 @@
     text-align: center;
     margin: 20px 0;
   }
+
+  
+  @media screen and (max-width: 480px) {
+   .typingContainer
+   {
+
+    font-size: 15px;
+   
+   }
+
+  }
   

@@ -23,7 +23,7 @@ const Login = () => {
         >
           GOOGLE
         </div>
-        <div className={`${styles.socialButton} ${styles.box}`}>GITHUB</div>
+        {/* <div className={`${styles.socialButton} ${styles.box}`}>GITHUB</div> */}
       </div>
     </div>
   )
