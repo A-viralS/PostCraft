@@ -21,7 +21,7 @@ const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
 const WritePage = () => {
   const router = useRouter()
-  const { data: session, status } = useSession()
+  const { status } = useSession()
   const [open, setOpen] = useState(false)
   const [file, setFile] = useState(null)
   const [media, setMedia] = useState('')
@@ -30,7 +30,7 @@ const WritePage = () => {
   const [catSlug, setCatSlug] = useState('')
 
   useEffect(() => {
-    if (file) {
+    if (typeof window !== 'undefined') {
       const storage = getStorage(app)
 
       const upload = () => {
@@ -54,9 +54,7 @@ const WritePage = () => {
                 break
             }
           },
-          error => {
-            console.error('Upload failed:', error)
-          },
+          error => {},
           () => {
             getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
               setMedia(downloadURL)
@@ -64,7 +62,7 @@ const WritePage = () => {
           }
         )
       }
-      upload()
+      file && upload()
     }
   }, [file])
 
@@ -81,10 +79,19 @@ const WritePage = () => {
       .replace(/^-+|-+$/g, '')
 
   const handleSubmit = async () => {
-    // Set default image if no image is provided
-    const defaultImage = '/default-image.png'
-    const img = media || defaultImage
-
+    // const res = await fetch('http://localhost:3000/api/posts', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json' // Added Content-Type header
+    //   },
+    //   body: JSON.stringify({
+    //     title,
+    //     desc: value,
+    //     img: media,
+    //     slug: slugify(title),
+    //     catSlug: catSlug || 'collegeLife' // If not selected, choose the general category
+    //   })
+    // })
     const res = await fetch('https://post-craft.vercel.app/api/posts', {
       method: 'POST',
       headers: {
@@ -93,7 +100,7 @@ const WritePage = () => {
       body: JSON.stringify({
         title,
         desc: value,
-        img,
+        img: media,
         slug: slugify(title),
         catSlug: catSlug || 'collegeLife' // If not selected, choose the general category
       })
